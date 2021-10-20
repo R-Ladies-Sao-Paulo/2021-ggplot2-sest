@@ -8,7 +8,7 @@
 
 ## Dia 20/10/2021
 - Tema: Explorando gráficos com ggplot2
-- Materiais: [Slides](https://r-ladies-sao-paulo.github.io/2021-ggplot2-sest/20_out/apresentacao-aula-2.html) e [Script](https://github.com/R-Ladies-Sao-Paulo/2021-ggplot2-sest/blob/main/20_out/script_apoio_aula_2.R)
+- Materiais: [Slides](https://r-ladies-sao-paulo.github.io/2021-ggplot2-sest/20_out/apresentacao-aula-2.html) e [Script](https://github.com/R-Ladies-Sao-Paulo/2021-ggplot2-sest/blob/main/20_out/script_apoio_aula2.R)
 - Video: [Link para o Youtube](https://youtu.be/26ZQEzWgaNA)
 
 
