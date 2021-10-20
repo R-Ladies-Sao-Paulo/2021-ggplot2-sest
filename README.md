@@ -9,10 +9,10 @@
 ## Dia 20/10/2021
 - Tema: Explorando gráficos com ggplot2
 - Materiais: Em breve!
-- Video: https://youtu.be/26ZQEzWgaNA
+- Video: [Link para o Youtube](https://youtu.be/26ZQEzWgaNA)
 
 
 ## Dia 21/10/2021
 - Tema: Storytelling com gráficos
 - Materiais: Em breve!
-- Video: https://youtu.be/TBGLupSVSQY
+- Video: [Link para o Youtube](https://youtu.be/TBGLupSVSQY)
