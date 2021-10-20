@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>index.knit</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="19, 20 e 21 de outubro/2021 - 18h30 às 20h00" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/metropolis.css" type="text/css" />
+    <link rel="stylesheet" href="css/metropolis-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/footer.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <center>
+<img src= 'img/rainbow.png' width = '30%' alt='R-Ladies Logo'></br>
+</center>
+## R-Ladies São Paulo <BR> <strong>Princípios de Dataviz com R e ggplot2</strong> <BR> Semana da Estatística (SEst) UFSCar e USP 2021
+### 19, 20 e 21 de outubro/2021 - 18h30 às 20h00
+
+---
+
+layout: true
+  
+&lt;div class="my-footer"&gt;&lt;span&gt;
+
+
+&lt;a href="https://www.meetup.com/pt-BR/R-Ladies-Sao-Paulo"&gt;Meetup&lt;/a&gt; |
+&lt;a href="https://twitter.com/RLadiesSaoPaulo"&gt;Twitter&lt;/a&gt; | 
+&lt;a href="http://instagram.com/RLadiesSaoPaulo"&gt;Instagram&lt;/a&gt; |
+&lt;a href="http://facebook.com/RLadiesSaoPaulo"&gt;Facebook&lt;/a&gt; |
+&lt;a href="https://github.com/rladies/meetup-presentations_sao-paulo"&gt;GitHub&lt;/a&gt; |
+&lt;a href="https://www.youtube.com/channel/UCU3ePTnZQurDkYgPK61DAOw"&gt;YouTube&lt;/a&gt;
+
+
+&lt;/span&gt;&lt;/div&gt; 
+---
+class:
+
+
+
+# Programação
+
+**Princípios de Dataviz com R e ggplot2**
+
+- 19/out: Introdução do pacote `ggplot2`
+
+- 20/out: Explorando gráficos com `ggplot2`
+
+- 21/out: Storytelling com dados
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/horst/ggplot2_exploracao_pt.png" alt="Art by &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt;Allison Horst&amp;lt;/a&amp;gt;" width="35%" /&gt;
+&lt;p class="caption"&gt;Art by &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class:
+
+# Hoje
+
+**Introdução do pacote `ggplot2`**
+
+- Instalação do pacote `ggplot2` 
+
+- Lógica e estrutura básica de montagem de um gráfico no `ggplot` 
+
+- Camadas de um gráfico
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/horst/ggplot2_exploracao_pt.png" alt="Art by &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt;Allison Horst&amp;lt;/a&amp;gt;" width="35%" /&gt;
+&lt;p class="caption"&gt;Art by &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class:
+
+# Pré-requisitos
+
+## `R` e `RStudio` instalados no seu notebook 
+
+&lt;img src="img/rlogos/rstudio-r.jpg" width="40%" style="display: block; margin: auto;" /&gt;
+
+- Instale o R [fazendo o download aqui](https://cran.r-project.org/) e o RStudio [aqui](https://rstudio.com/products/rstudio/download/#download).
+
+- Passo a passo da instalação (livro Curso-R) [aqui](https://livro.curso-r.com/1-instalacao.html)
+
+---
+class:
+
+# R-Studio
+
+RStudio é a **IDE** (integrated development environment) da Linguagem R, ou seja, o ambiente que utilizamos para editar e executar os códigos em R. Tem quatro áreas, conforme a figura abaixo:
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/intro-rstudio/RStudio_screen.png" alt="Fonte: &amp;lt;a href='https://github.com/MaryMS/2018-11-R-Course-FatecZS'&amp;gt;Curso Introdução ao R - Fatec&amp;lt;/a&amp;gt;" width="80%" /&gt;
+&lt;p class="caption"&gt;Fonte: &lt;a href='https://github.com/MaryMS/2018-11-R-Course-FatecZS'&gt;Curso Introdução ao R - Fatec&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: center, middle, inverse
+
+# Vamos começar?
+
+&lt;!-- - instalar o ggplot2 (e tidyverse) --&gt;
+&lt;!-- - explicar como o ggplot2 funciona --&gt;
+&lt;!-- - exemplos ggplot2 --&gt;
+
+
+---
+class: 
+
+# O que é o ggplot2?
+Pacote para visualização de dados, criado por [Hadley Wickham](https://github.com/hadley) e mantido pela [RStudio](https://rstudio.com/).
+
+Referência: livro [Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html), do Hadley Wickham.
+
+### Por que usar o ggplot2 para montar minhas visualizações?
+
+- Versátil e Esteticamente rico.
+
+- Implementação dos conceitos de *Grammar of Graphics*.
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/horst/ggplot2_obra_prima_pt.png" alt="Art by &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt;Allison Horst&amp;lt;/a&amp;gt;" width="35%" /&gt;
+&lt;p class="caption"&gt;Art by &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+---
+class: 
+
+# Grammar of Graphics
+
+- A origem do nome **GG**plot
+
+- Estrutura que segue uma abordagem em camadas para descrever e construir visualizações ou gráficos de maneira estruturada.
+
+- Uma visualização geralmente tem vários componentes ou aspectos, e alavancar essa gramática de gráficos em camadas nos ajuda a descrever e entender cada componente envolvido na visualização - em termos de dados, estética, escala, objetos e assim por diante.
+
+&lt;img src="img/rlogos/hex-ggplot2.png" width="20%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Sintaxe básica do ggplot
+
+- Um gráfico feito com ggplot2 é uma soma de **camadas**.
+
+- Não precisa utilizar todos os componentes seguintes em seu gráfico, mas é interessante saber que existem.
+
+&lt;BR&gt;
+
+&lt;img src="img/camadas.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Sintaxe básica do ggplot
+
+- A função `ggplot()` inicia um gráfico ggplot.
+
+- Utilizamos o símbolo **`+`** para somar as camadas.
+
+&lt;img src="img/camadas.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+```
+ ggplot(data, aesthetics) +
+    geometries(statistics) +
+    facets +
+    coordinates +
+    theme
+```
+---
+class: 
+
+# Construção de um gráfico
+
+1. **Base de dados** que temos interesse em analisar e extrair informação.
+
+---
+class: 
+
+# Construção de um gráfico
+
+1. **Base de dados** que temos interesse em analisar e extrair informação.
+
+2. **Mapear as variáveis** que queremos relacionar.
+
+---
+class: 
+
+# Construção de um gráfico
+
+1. **Base de dados** que temos interesse em analisar e extrair informação.
+
+2. **Mapear as variáveis** que queremos relacionar.
+  
+3. Definir o **objeto geométrico** mais adequado: linha, ponto, barras etc.
+
+
+---
+class: 
+
+# Construção de um gráfico
+
+1. **Base de dados** que temos interesse em analisar e extrair informação.
+
+2. **Mapear as variáveis** que queremos relacionar.
+  
+3. Definir o **objeto geométrico** mais adequado: linha, ponto, barras etc.
+
+&lt;BR&gt;
+&lt;BR&gt;
+
+```
+ggplot(data = [BASE DE DADOS], 
+       mapping = aes(x = [VARIÁVEL X], y = [VARIÁVEL Y])) +
+  geom_[OBJETO GEOMÉTRICO]()
+```
+
+---
+class: 
+
+# Objetos geométricos
+
+- Gráficos de dispersão: `geom_point()`
+
+- Gráficos de barras: `geom_col()` ou `geom_bar()`
+
+- Gráficos de linhas: `geom_line()`
+
+- Histograma: `geom_hist()`
+
+- Boxplot: `geom_boxplot()`
+
+- Densidade: `geom_density()`
+
+- Suavização: `geom_smooth()`
+
+- Adicionar rótulos ou textos: `geom_label()` ou `geom_text()`
+
+---
+class: 
+
+# Mão na massa
+
+&lt;img src="img/maonamassa.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+Primeiro, precisamos instalar os pacotes necessários e carregá-los:
+  - Pacote `dplyr` para manuseio dos dados.
+  - Pacote `ggplot2` para a visualização dos dados.
+  
+
+```r
+# install.packages('dplyr')
+# install.packages('ggplot2')
+
+library(ggplot2)
+library(dplyr)
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Selecionar a base de dados
+
+- Na maioria das vezes precisaremos organizar e limpar os dados antes de utilizar o ggplot. Aqui vamos partir de uma base já organizada.
+
+- Para a parte prática, utilizaremos a base do R *airquality*.
+
+
+```r
+# Leitura da base de dados
+airquality &lt;- as_tibble(datasets::airquality)
+head(airquality)
+```
+
+```
+## # A tibble: 6 × 6
+##   Ozone Solar.R  Wind  Temp Month   Day
+##   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1    41     190   7.4    67     5     1
+## 2    36     118   8      72     5     2
+## 3    12     149  12.6    74     5     3
+## 4    18     313  11.5    62     5     4
+## 5    NA      NA  14.3    56     5     5
+## 6    28      NA  14.9    66     5     6
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Mapear as variáveis
+
+As variáveis escolhidas para a minha análise são: **Wind** e **Temp**.
+
+
+```r
+select(airquality, Wind, Temp)
+```
+
+```
+## # A tibble: 153 × 2
+##     Wind  Temp
+##    &lt;dbl&gt; &lt;int&gt;
+##  1   7.4    67
+##  2   8      72
+##  3  12.6    74
+##  4  11.5    62
+##  5  14.3    56
+##  6  14.9    66
+##  7   8.6    65
+##  8  13.8    59
+##  9  20.1    61
+## 10   8.6    69
+## # … with 143 more rows
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Definir objeto geométrico
+
+Como as variáveis **Wind** e **Temp** são numéricas, vamos fazer um gráfico de pontos, chamando a camada `geom_point()`.
+
+---
+class: 
+
+# Mão na massa
+
+1. **Base de dados**: airquality.
+
+2. **Mapear as variáveis**: Wind (x) e Temp (y).
+  
+3. **Objeto geométrico**: pontos (`geom_point()`).
+
+&lt;BR&gt;
+
+
+```r
+ggplot(data = airquality,
+       mapping = aes(x = Wind, y = Temp)) +
+  geom_point() # Camada 1
+```
+---
+class: 
+
+# Mão na massa
+
+&lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+O mapeamento das variáveis também pode ser inserido no objeto geométrico:
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp))
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-15-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Como podemos melhorar?
+
+&lt;BR&gt;
+&lt;BR&gt;
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="img/horst/ggplot2_obra_prima_pt.png" alt="Art by &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt;Allison Horst&amp;lt;/a&amp;gt;" width="45%" /&gt;
+&lt;p class="caption"&gt;Art by &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt;Allison Horst&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Como podemos melhorar?
+
+- Títulos e subtítulos
+- Nomear eixos
+- Cores e tamanhos dos objetos geométricos
+- Temas
+
+---
+class: 
+
+# Mão na massa
+
+#### Cores e tamanhos dos objetos geométricos
+
+- Caso 1: meramente estéticos
+- Dentro do objeto geométrico (`geom_point()`)
+- Cor: `geom_point(color = "cor desejada")`
+- Tamanho dos pontos `geom_point(size = valor numérico)`
+
+
+```r
+ggplot(data = airquality,
+       mapping = aes(x = Wind, y = Temp)) +
+  geom_point(color = "blue", size = 4)  # Camada 1
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Cores e tamanhos dos objetos geométricos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Cores e tamanhos dos objetos geométricos
+
+- Caso 2: associados a uma terceira variável: `aes()` (mapeamento das variáveis)
+- Dentro do objeto geométrico (`geom_point()`)
+- Cor: `geom_point(color = variável)`
+- Tamanho dos pontos `geom_point(size = variável)`
+
+Vou associar a cor à variável **Month** (numérico de 5 a 9)
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, color = factor(Month)), size = 2)  # Camada 1
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Cores e tamanhos dos objetos geométricos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Cores e tamanhos dos objetos geométricos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Cores e tamanhos dos objetos geométricos
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, size = factor(Month), color = factor(Month)))  # Camada 1
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Títulos e subtítulos
+
+- Nova camada: `ggtitle("Titulo", "subtítulo")`.
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, size = factor(Month), color = factor(Month))) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento")  # Camada 2
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Títulos e subtítulos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Eixos
+
+- Nova camada: `labs(x = "nome no eixo x", y = "nome no eixo y")`.
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, size = factor(Month), color = factor(Month))) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") # Camada 3
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Eixos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Eixos
+
+- Alterar limites das coordenadas: `xlim(c(a,b))` e `ylim(c(a,b))`.
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, size = factor(Month), color = factor(Month))) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") + # Camada 3
+  xlim(c(0,30)) + # Camada 4
+  ylim(c(50,150)) # Camada 5
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Eixos
+
+&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Legenda
+
+- Nova camana: `guides()`.
+- Associar com o tipo de representação: cor
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, color = factor(Month)), size = 3) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") + # Camada 3
+  guides(color=guide_legend(title="Mês")) # Camada 3
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Legenda
+
+&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas
+
+- Alterar temas dos gráficos: `theme_()`.
+- Muitos temas!
+
+*Tema clássico*
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, color = factor(Month)), size = 3) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") + # Camada 3
+  guides(color=guide_legend(title="Mês")) + # Camada 3
+  theme_classic()  # Camada 4
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas | Clássico
+
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas | Clássico / Tamanho da fonte
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, color = factor(Month)), size = 3) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") + # Camada 3
+  guides(color=guide_legend(title="Mês")) + # Camada 3
+  theme_classic(16)  # Camada 4
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas | Clássico / Tamanho da fonte
+
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas
+
+- Alterar temas dos gráficos: `theme_()`.
+- Muitos temas!
+
+*Tema escuro*
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, color = factor(Month)), size = 3) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") + # Camada 3
+  guides(color=guide_legend(title="Mês")) + # Camada 3
+  theme_dark(16)  # Camada 4
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas | Escuro
+
+&lt;img src="index_files/figure-html/unnamed-chunk-36-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas
+
+- Alterar temas dos gráficos: `theme_()`.
+- Muitos temas!
+
+*Tema mínimo*
+
+
+```r
+ggplot(data = airquality) +
+  geom_point(mapping = aes(x = Wind, y = Temp, color = factor(Month)), size = 3) + # Camada 1
+  ggtitle("Qualidade do ar", "Temperatura pelo Vento") +  # Camada 2
+  labs(x = "Vento (Km/h)", y = "Temperatura (Farenheit)") + # Camada 3
+  guides(color=guide_legend(title="Mês")) + # Camada 3
+  theme_minimal(16)  # Camada 4
+```
+
+---
+class: 
+
+# Mão na massa
+
+#### Temas | Mínimo
+
+&lt;img src="index_files/figure-html/unnamed-chunk-38-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: 
+
+# Dica
+
+- [Cheatsheets RStudio](https://www.rstudio.com/resources/cheatsheets/)
+
+
+
+&lt;img src="img/cheatsheet_ggplot.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle, inverse
+
+# Perguntas
+
+---
+class: center, middle, inverse
+
+# Obrigada &lt;3
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<style>
+  .logo {
+    background-image: url(img/rainbow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    width: 50px;
+    height: 128px;
+    z-index: 0;
+  }
+</style>
+  
+  <script>
+  document
+.querySelectorAll(
+  '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+  // ':not(.inverse)' +
+    ':not(.hide-logo)'
+)
+.forEach(el => {
+  el.innerHTML += '<div class="logo"></div>';
+});
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
