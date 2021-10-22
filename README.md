@@ -14,5 +14,5 @@
 
 ## Dia 21/10/2021
 - Tema: Storytelling com gráficos
-- Materiais: Em breve!
+- Materiais: [Slides](https://r-ladies-sao-paulo.github.io/2021-ggplot2-sest/21_out/principios_visualizacao_dados-resumo.pdf)
 - Video: [Link para o Youtube](https://youtu.be/TBGLupSVSQY)
